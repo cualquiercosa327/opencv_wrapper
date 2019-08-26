@@ -310,11 +310,11 @@ namespace opencv_wrapper
 	};
 	EXPORTS void cvtColor(const Mat& src, Mat& dst, int code, int dstCn = 0);
 
-	EXPORTS void findContours(const Mat& image, Contour** contours, std::size_t& total_contours);
+	EXPORTS void findContours(const Mat& image, Contour*& contours, std::size_t& total_contours);
 
 	// Not a opencv function but used to destroy
 	// dynamically allocated memory
-	EXPORTS void destroyFoundContours(Contour** contours);
+	EXPORTS void destroyFoundContours(Contour*& contours);
 
 	//! Various border types, image boundaries are denoted with `|`
 	enum BorderTypes {

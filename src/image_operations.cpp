@@ -48,7 +48,7 @@ namespace opencv_wrapper
 		cv::cvtColor(*src.get(), *dst.get(), code, dstCn);
 	}
 
-	void findContours(const Mat& image, Contour** contours, std::size_t& total_contours)
+	void findContours(const Mat& image, Contour*& contours, std::size_t& total_contours)
 	{
 		std::vector<std::vector<cv::Point>> cv_contours;
 		std::vector<cv::Vec4i> hierarchy;
@@ -56,17 +56,17 @@ namespace opencv_wrapper
 			cv::Point(0, 0));
 
 		total_contours = cv_contours.size();
-		*contours = new Contour[cv_contours.size()];
+		contours = new Contour[cv_contours.size()];
 
 		for (std::size_t i = 0; i < cv_contours.size(); i++)
 		{
-			contours[i]->get()->SetPoints(cv_contours[i]);
+			contours[i].get()->SetPoints(cv_contours[i]);
 		}
 	}
 
-	void destroyFoundContours(Contour** contours)
+	void destroyFoundContours(Contour*& contours)
 	{
-		delete[] * contours;
+		delete[] contours;
 	}
 
 	void copyMakeBorder(const Mat& src, Mat& dst,
